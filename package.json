@@ -1,15 +1,26 @@
 {
   "name": "sgapi",
   "version": "1.0.0",
-  "description": "API for SG for administration\u001b[1;5D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[1;5C\u001b[1;5D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[2~condominium\u001b[3~\u001b[3~\u001b[3~\u001b[C\u001b[C admin.",
-  "main": "app.js",
+  "description": "API for SG condominium admin.",
+  "main": "src/app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "\u001b[2~https://github.com/guiturtera/SGApi.git"
+    "url": "https://github.com/guiturtera/SGApi.git"
   },
   "author": "Guilherme Turtera",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
 }
