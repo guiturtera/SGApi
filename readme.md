@@ -1,3 +1,4 @@
 // TO ADD ApolloServer, GraphQl
-npm i --dev
+npm install --dev
 npx eslint --init
+npx commitizen init cz-conventional-changelog --save-dev --save-exact

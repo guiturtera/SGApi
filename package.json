@@ -5,6 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon app.js",
+    "release": "standard-version",
+    "commit": "cz",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,13 +16,21 @@
   "author": "Guilherme Turtera",
   "license": "ISC",
   "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "standard-version": "^9.3.1"
   },
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.10.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
