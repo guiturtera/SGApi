@@ -4,7 +4,8 @@
   "description": "API for SG condominium admin.",
   "main": "src/app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
+    "doc": "node ./docs/swagger.js",
     "release": "standard-version",
     "commit": "cz",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,7 +31,11 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5",
+    "swagger-autogen": "^2.11.2",
+    "swagger-ui-express": "^4.1.6"
   },
   "config": {
     "commitizen": {

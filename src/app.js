@@ -1,10 +1,17 @@
 const morgan = require('morgan');
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const userRouter = require('./routes/user');
+const swaggerFile = require('../docs/swagger_output.json');
 
 const app = express();
-// Middleware
-app.use(morgan());
 
-app.listen(5000, () => {
-  console.log('Listening at port 5000');
-});
+// Middleware
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+// ENDPOINTS
+app.use('/user', userRouter);
+
+app.listen(5000, () => { console.log('Listening at port 5000'); });
