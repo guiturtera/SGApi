@@ -4,6 +4,7 @@
   "description": "API for SG condominium admin.",
   "main": "src/app.js",
   "scripts": {
+    "predev": "npm run doc",
     "dev": "nodemon app.js",
     "doc": "node ./docs/swagger.js",
     "release": "standard-version",

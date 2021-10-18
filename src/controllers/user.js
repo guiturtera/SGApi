@@ -1,5 +1,12 @@
+const logins = require('../db/user');
+
 const login = async (req, res) => {
-  res.status(200).send('LOGIN PAGE');
+  const { username, password } = req.body;
+  if (username in logins) {
+    res.status(200).send(logins);
+  } else {
+    res.status(400).send('User not found!');
+  }
 };
 
 const register = async (req, res) => {
