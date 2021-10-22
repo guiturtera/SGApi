@@ -1,16 +1,7 @@
-const logins = require('../db/user');
+const users = require('../db/users');
 
-const login = async (req, res) => {
-  const { username, password } = req.body;
-  if (username in logins) {
-    res.status(200).send(logins);
-  } else {
-    res.status(400).send('User not found!');
-  }
+const getAllUsers = (req, res) => {
+  res.send(users);
 };
 
-const register = async (req, res) => {
-  res.status(200).send('REGISTER PAGE');
-};
-
-module.exports = { login, register };
+module.exports = { getAllUsers };
