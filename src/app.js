@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const swaggerFile = require('../docs/swagger_output.json');
+const connectDB = require('./db/connect');
 
 const app = express();
 
@@ -16,4 +17,11 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
-app.listen(5000, () => { console.log('Listening at port 5000'); });
+app.listen(5000, async () => {
+  try {
+    await connectDB('mongodb+srv://admin:admin@cluster0.mbnwz.mongodb.net/lgpdbase?retryWrites=true&w=majority');
+    console.log('Listening at port 5000');
+  } catch (err) {
+    console.log(err);
+  }
+});

@@ -1,7 +1,14 @@
-const users = require('../db/users');
+const User = require('../models/User');
 
-const getAllUsers = (req, res) => {
-  res.send(users);
+const getAllUsers = async (req, res) => {
+  const user = User.findById(1);
+  res.status(200).json({ user });
 };
 
-module.exports = { getAllUsers };
+const createSimpleUser = async (req, res) => {
+  const user = new User({ name: 'Gui', password: 'aaa' });
+  await user.save();
+  res.status(200).json({ user });
+};
+
+module.exports = { getAllUsers, createSimpleUser };
