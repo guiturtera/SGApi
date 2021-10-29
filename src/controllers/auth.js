@@ -3,7 +3,7 @@ const saltedSha256 = require('salted-sha256');
 
 const SALT_TO_CHANGE = '*@_zC4CjPZ(D';
 
-const isValidUser = async (userJson) => {
+const validateUser = async (userJson) => {
   const errors = [];
   const { username, password } = userJson;
   if (password.length < 8) {
@@ -14,7 +14,6 @@ const isValidUser = async (userJson) => {
   }
 
   if (errors.length === 0) return { username, password };
-  console.log('eee');
   throw new Error(errors);
 };
 
@@ -23,6 +22,13 @@ const encryptUserToCreate = async (userJson) => {
   newUserJson.password = await saltedSha256(userJson.password, SALT_TO_CHANGE, true);
   return userJson;
 };
+
+const addUserToDb = async (userJson) => {
+  const { username, password } = userJson;
+  const newUser = new User({ username, password });
+  newUser.save();
+  return newUser;
+}
 
 const login = async (req, res) => {
   //const passwordHash = 
@@ -37,9 +43,11 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   const { username, password } = req.body;
-  await isValidUser({ username, password })
+  await validateUser({ username, password })
+    .then((user) => encryptUserToCreate(user))
+    .then((user) => addUserToDb(user))
     .then((user) => res.status(200).send(user))
-    .catch((error) => console.log(error));
+    .catch((error) => {res.status(400).send({ 'error': error.message })});
 };
 
 module.exports = { login, register };
