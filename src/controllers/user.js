@@ -6,7 +6,8 @@ const getAllUsers = async (req, res) => {
 };
 
 const createSimpleUser = async (req, res) => {
-  const user = new User({ name: 'Gui', password: 'aaa' });
+  const { name, password } = req.body;
+  const user = new User({ name, password });
   await user.save();
   res.status(200).json({ user });
 };

@@ -1,6 +1,31 @@
-//const User = require('../models/User');
+const User = require('../models/User');
+const saltedSha256 = require('salted-sha256');
+
+const SALT_TO_CHANGE = '*@_zC4CjPZ(D';
+
+const isValidUser = async (userJson) => {
+  const errors = [];
+  const { username, password } = userJson;
+  if (password.length < 8) {
+    errors.push('Password length must be higher than 8!');
+  }
+  if (username.length < 8) {
+    errors.push('Username must be higher than 8!');
+  }
+
+  if (errors.length === 0) return { username, password };
+  console.log('eee');
+  throw new Error(errors);
+};
+
+const encryptUserToCreate = async (userJson) => {
+  const newUserJson = userJson;
+  newUserJson.password = await saltedSha256(userJson.password, SALT_TO_CHANGE, true);
+  return userJson;
+};
 
 const login = async (req, res) => {
+  //const passwordHash = 
   res.status(200).send('login works');
   /*const { username, password } = req.body;
   if (username in logins) {
@@ -11,7 +36,10 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  res.status(200).send('REGISTER PAGE');
+  const { username, password } = req.body;
+  await isValidUser({ username, password })
+    .then((user) => res.status(200).send(user))
+    .catch((error) => console.log(error));
 };
 
 module.exports = { login, register };
